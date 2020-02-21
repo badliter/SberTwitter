@@ -1,9 +1,9 @@
-*/HELP.md
-*/target/
+*/*/HELP.md
+*/*/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### IntelliJ IDEA ###
-*/.idea
+*/*/.idea
 *.iws
 *.iml
 *.ipr
