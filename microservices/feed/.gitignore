@@ -1,0 +1,11 @@
+### IntelliJ IDEA ###
+.idea
+.gradle
+*.iml
+
+### Compile Files
+target/
+build/
+
+### Other Sources
+HELP.md
