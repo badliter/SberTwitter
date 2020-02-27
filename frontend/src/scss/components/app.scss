@@ -1,0 +1,17 @@
+.app {
+    display: grid;
+    height: 100vh;
+    background-image: linear-gradient( 109.2deg,  rgba(107,52,255,1) 16.5%, rgba(51,159,247,1) 81% );
+
+    &__wrapper {
+        place-self: center;
+        display: grid;
+        justify-items: center;
+    }
+
+    &__header {
+        font-size: $font-size-header;
+        line-height: $line-height-header;
+        color: $color-white;
+    }
+}
