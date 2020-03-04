@@ -25,12 +25,12 @@ public class SubscribersController {
         return new ResponseEntity<>(dao.getSubscribers(user_id), OK);
     }
 
-    @PutMapping("/addSubscribing")
+    @PostMapping("/addSubscribing")
     public ResponseEntity<String> addSubscribing(@RequestBody SubscribingCompositeKey subscribing){
         return new ResponseEntity<>(dao.insertSubscribing(subscribing), OK);
     }
 
-    @DeleteMapping("/deleteSubscribing")
+    @PostMapping("/deleteSubscribing")
     public ResponseEntity<String> deleteSubscribing(@RequestBody SubscribingCompositeKey subscribing){
         return new ResponseEntity<>(dao.deleteSubscribing(subscribing), OK);
     }

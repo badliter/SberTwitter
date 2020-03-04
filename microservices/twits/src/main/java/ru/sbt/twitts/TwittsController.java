@@ -38,13 +38,13 @@ public class TwittsController {
         return new ResponseEntity<>(dao.updateTwittContent(twitt), OK);
     }
 
-    @PutMapping("/postTwitt")
+    @PostMapping("/postTwitt")
     public ResponseEntity<String> postTwitt(@RequestBody Twitt twitt){
         return new ResponseEntity<>(dao.insertTwitt(twitt), OK);
     }
 
-    @DeleteMapping("/deleteTwitt/{user_id}/{twitt_id}")
-    public ResponseEntity<String> deleteTwitt(@PathVariable("user_id") long user_id, @PathVariable("twitt_id") long twitt_id){
-        return new ResponseEntity<>(dao.deleteTwitt(user_id, twitt_id), OK);
+    @PostMapping("/deleteTwitt")
+    public ResponseEntity<String> deleteTwitt(@RequestBody Twitt twitt){
+        return new ResponseEntity<>(dao.deleteTwitt(twitt.getUser_id(), twitt.getTwitt_id()), OK);
     }
 }
