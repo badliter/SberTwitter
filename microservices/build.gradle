@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+
+    group = 'ru.sber.lm'
+    version = '1.0-SNAPSHOT'
+    sourceCompatibility = '1.8'
+
+    repositories {
+        mavenCentral()
+    }
+
+    task sourceJar(type: Jar) {
+        from sourceSets.main.allJava
+    }
+
+
+    dependencies {
+        implementation platform('org.springframework.boot:spring-boot-dependencies:2.2.5.RELEASE'),
+                platform("org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR1")
+
+        implementation 'ch.qos.logback:logback-classic'
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-engine',
+                'org.mockito:mockito-junit-jupiter'
+
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+
+        implementation 'org.projectlombok:lombok:1.18.10'
+        testImplementation 'org.projectlombok:lombok:1.18.10'
+        annotationProcessor 'org.projectlombok:lombok:1.18.10'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
+    }
+
+    test {
+        useJUnitPlatform()
+        exclude '**/*IT.class'
+    }
+}
