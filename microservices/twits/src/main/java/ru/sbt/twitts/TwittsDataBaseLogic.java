@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class JdbcTemplateTwittsDao {
+public class TwittsDataBaseLogic {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

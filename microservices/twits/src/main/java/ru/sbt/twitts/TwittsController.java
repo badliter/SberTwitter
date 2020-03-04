@@ -11,7 +11,7 @@ import static org.springframework.http.HttpStatus.*;
 @RestController
 public class TwittsController {
     @Autowired
-    private JdbcTemplateTwittsDao dao;
+    private TwittsDataBaseLogic dao;
 
     @GetMapping("/getAllTwitts/{user_id}")
     public ResponseEntity<List<Twitt>> getAllTwits(@PathVariable("user_id") long user_id) {
