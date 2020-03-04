@@ -36,24 +36,27 @@ public class TwittsDataBaseLogic {
                 Long.class);
     }
 
-    public void updateTwittContent(Twitt twitt){
+    public String updateTwittContent(Twitt twitt){
         jdbcTemplate.update("UPDATE TWITTS SET CONTENT = ? WHERE USER_ID = ? AND TWITT_ID = ?;",
                 twitt.getContent(),
                 twitt.getUser_id(),
                 twitt.getTwitt_id());
+        return "Twitt was edit!!!";
     }
 
-    public void insertTwitt(Twitt twitt) {
+    public String insertTwitt(Twitt twitt) {
         jdbcTemplate.update("INSERT INTO TWITTS values (?, ?, ?, ?);",
                 twitt.getUser_id(),
                 getNumberOfTwitts(twitt.getUser_id()) != 0 ? getTwittWithMaxId(twitt.getUser_id()).getTwitt_id() + 1 : 1,
                 twitt.getContent(),
                 twitt.getCreation_time());
+        return "Twitt was added!!!";
     }
 
-    public void deleteTwitt(long user_id, long twitt_id) {
+    public String deleteTwitt(long user_id, long twitt_id) {
         jdbcTemplate.update("DELETE FROM TWITTS WHERE USER_ID = ? AND TWITT_ID = ?;",
                 user_id,
                 twitt_id);
+        return "Twitt was deleted!!!";
     }
 }

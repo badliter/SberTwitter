@@ -1,7 +1,6 @@
 package ru.sbt.subscribers.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,15 +23,17 @@ public class DataBaseLogic {
                 Long.class);
     }
 
-    public void insertSubscribing(SubscribingCompositeKey subscribing) {
+    public String insertSubscribing(SubscribingCompositeKey subscribing) {
         jdbcTemplate.update("INSERT INTO SUBSCRIBING (USER_ID, SUBSCRIBING_ID)  VALUES (?, ?);",
                 subscribing.getUser_id(),
                 subscribing.getSubscribing_id());
+        return "Subscribing was added!!!";
     }
 
-    public void deleteSubscribing(SubscribingCompositeKey subscribing) {
+    public String deleteSubscribing(SubscribingCompositeKey subscribing) {
         jdbcTemplate.update("DELETE FROM SUBSCRIBING WHERE USER_ID = ? AND SUBSCRIBING_ID = ?;",
                 subscribing.getUser_id(),
                 subscribing.getSubscribing_id());
+        return "Subscribing was deleted!!!";
     }
 }

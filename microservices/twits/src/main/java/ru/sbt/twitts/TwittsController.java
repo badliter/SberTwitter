@@ -35,19 +35,16 @@ public class TwittsController {
 
     @PostMapping("/editTwitt")
     public ResponseEntity<String> editTwitt(@RequestBody Twitt twitt){
-        dao.updateTwittContent(twitt);
-        return new ResponseEntity<>("Twitt was edit!!!", OK);
+        return new ResponseEntity<>(dao.updateTwittContent(twitt), OK);
     }
 
     @PutMapping("/postTwitt")
     public ResponseEntity<String> postTwitt(@RequestBody Twitt twitt){
-        dao.insertTwitt(twitt);
-        return new ResponseEntity<>("Twitt was added!!!", OK);
+        return new ResponseEntity<>(dao.insertTwitt(twitt), OK);
     }
 
     @DeleteMapping("/deleteTwitt/{user_id}/{twitt_id}")
     public ResponseEntity<String> deleteTwitt(@PathVariable("user_id") long user_id, @PathVariable("twitt_id") long twitt_id){
-        dao.deleteTwitt(user_id, twitt_id);
-        return new ResponseEntity<>("Twitt was deleted!!!", OK);
+        return new ResponseEntity<>(dao.deleteTwitt(user_id, twitt_id), OK);
     }
 }

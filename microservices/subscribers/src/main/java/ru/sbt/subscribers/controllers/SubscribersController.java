@@ -27,13 +27,11 @@ public class SubscribersController {
 
     @PutMapping("/addSubscribing")
     public ResponseEntity<String> addSubscribing(@RequestBody SubscribingCompositeKey subscribing){
-        dao.insertSubscribing(subscribing);
-        return new ResponseEntity<>("Subscribing was added!!!", OK);
+        return new ResponseEntity<>(dao.insertSubscribing(subscribing), OK);
     }
 
     @DeleteMapping("/deleteSubscribing")
     public ResponseEntity<String> deleteSubscribing(@RequestBody SubscribingCompositeKey subscribing){
-        dao.deleteSubscribing(subscribing);
-        return new ResponseEntity<>("Subscribing was deleted!!!", OK);
+        return new ResponseEntity<>(dao.deleteSubscribing(subscribing), OK);
     }
 }
