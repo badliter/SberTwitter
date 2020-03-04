@@ -46,7 +46,7 @@ public class JdbcTemplateTwittsDao {
     public void insertTwitt(Twitt twitt) {
         jdbcTemplate.update("INSERT INTO TWITTS values (?, ?, ?, ?);",
                 twitt.getUser_id(),
-                twitt.getTwitt_id(),
+                getNumberOfTwitts(twitt.getUser_id()) != 0 ? getTwittWithMaxId(twitt.getUser_id()).getTwitt_id() + 1 : 1,
                 twitt.getContent(),
                 twitt.getCreation_time());
     }
