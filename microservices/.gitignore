@@ -2,6 +2,7 @@ HELP.md
 .gradle/
 build/
 target/
+pgdata/
 
 ### IntelliJ IDEA ###
 .idea

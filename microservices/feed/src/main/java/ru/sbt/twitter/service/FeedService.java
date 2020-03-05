@@ -2,7 +2,7 @@ package ru.sbt.twitter.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sbt.twitter.entity.FeedTable;
+import ru.sbt.twitter.dto.FeedDTOInterface;
 import ru.sbt.twitter.repository.FeedRepositoryImpl;
 
 import java.util.List;
@@ -17,8 +17,8 @@ public class FeedService {
         this.feedRepository = feedRepository;
     }
 
-    public List<FeedTable> getFeed(Long user_id) {
-        List<FeedTable> news = feedRepository.findFeedTablesByUser_id(user_id);
+    public List<FeedDTOInterface> getFeed(Long userId) {
+        List<FeedDTOInterface> news = feedRepository.findByUserId(userId);
         return news;
     }
 }

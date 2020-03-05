@@ -9,3 +9,5 @@ build/
 
 ### Other Sources
 HELP.md
+pgdata/
+/src/main/java/ru/sbt/twitter/database/postgres/pgdata/
