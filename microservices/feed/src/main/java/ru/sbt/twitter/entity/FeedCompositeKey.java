@@ -11,5 +11,4 @@ public class FeedCompositeKey implements Serializable {
     private Long owner_id;
     private Long user_id;
     private Long twitt_id;
-
 }
