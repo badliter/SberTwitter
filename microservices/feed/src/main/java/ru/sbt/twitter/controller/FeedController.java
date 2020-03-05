@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import ru.sbt.twitter.entity.FeedTable;
-import ru.sbt.twitter.service.FeedService;
 import ru.sbt.twitter.Twitt;
+import ru.sbt.twitter.dto.FeedDTOInterface;
+import ru.sbt.twitter.service.FeedService;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -21,18 +21,21 @@ public class FeedController {
     private final FeedService feedService;
 
 
-
-
     /**
-     * TODO
+     *
+     *
      * @return
      */
     @GetMapping("/feed/{userid}")
-    public List<FeedTable> getFeed(@PathVariable("userid") Long userid) {
-        List<FeedTable> news = feedService.getFeed(userid);
+    public @ResponseBody List<FeedDTOInterface> getFeed(@PathVariable("userid") Long userid) {
+        List<FeedDTOInterface> news = feedService.getFeed(userid);
         return news;
     }
 
+//    @PostMapping("/addTwitt")
+//    public void postTwitt(@RequestBody List<TwittsTable> twittsTables){
+//        feedService.addTwitts(twittsTables);
+//    }
 
     /**
      * Получение всей ленты для пользователя
@@ -56,34 +59,5 @@ public class FeedController {
         return template.getForObject("http://twitts/" + id, Twitt.class);
     }
 
-    /**
-     * Обновление ленты пользователя, при добавлении новых твитов
-     *
-     * @param user_id  - id пользователя
-     * @param twit_ids - лист твитов
-     * @return
-     */
-    @PutMapping(value = "/updateTwits/{user_id}")
-    public @ResponseBody
-    ResponseEntity<String> updateTwitsFromFeedByUserId(@PathVariable("user_id") Long user_id,
-                                                       @RequestParam List<Integer> twit_ids) {
-        return new ResponseEntity<>("Put Response : "
-                + user_id + ", " + twit_ids, OK);
-    }
-
-    /**
-     * Удаление твитов из ленты пользователя
-     *
-     * @param user_id  - id пользователя
-     * @param twit_ids - лист твитов
-     * @return
-     */
-    @DeleteMapping(value = "/deleteTwits/{user_id}")
-    public @ResponseBody
-    ResponseEntity<String> deleteTwitsFromFeedByUserId(@PathVariable("user_id") Long user_id,
-                                                       @RequestParam List<Integer> twit_ids) {
-        return new ResponseEntity<>("Delete Response : "
-                + user_id + ", " + twit_ids, OK);
-    }
 
 }

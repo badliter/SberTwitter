@@ -10,12 +10,22 @@ psql -v ON_ERROR_STOP=1 --username feed_admin --dbname feed_db <<-EOSQL
     ALTER ROLE feed_admin set search_path = feed_cfg,public;
 EOSQL
 psql -v ON_ERROR_STOP=1 --username feed_admin --dbname feed_db <<-EOSQL
-  CREATE TABLE FEED(
-  ownerId BIGINT NOT NULL,
-  userId BIGINT NOT NULL,
-  twittId BIGINT NOT NULL,
+  CREATE TABLE USERSINFO(
+  userid BIGINT NOT NULL PRIMARY KEY,
+  login TEXT,
+  firstname VARCHAR(500),
+  lastname VARCHAR(500)
+) TABLESPACE feed_cfg_data;
+  CREATE TABLE TWEETS(
+  tweetid BIGINT NOT NULL,
+  userid BIGINT REFERENCES USERSINFO(userid),
   content TEXT,
   date TIMESTAMP,
-  PRIMARY KEY(ownerId,userId,twittId)
+  PRIMARY KEY(tweetid,userid)
 ) TABLESPACE feed_cfg_data;
+  CREATE TABLE OWNERSUBSCRIPTIONS(
+  ownerid BIGINT NOT NULL,
+  userid BIGINT REFERENCES USERSINFO(userid),
+  PRIMARY KEY(ownerid,userid)
+)
 EOSQL

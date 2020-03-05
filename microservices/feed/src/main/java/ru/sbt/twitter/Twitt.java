@@ -1,13 +1,15 @@
 package ru.sbt.twitter;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
+@NoArgsConstructor
 public class Twitt {
-    private int id;
-    private LocalDateTime creationTime;
-    private String author;
+    private Long user_id;
+    private Long twitt_id;
     private String content;
+    private OffsetDateTime creation_time;
 }

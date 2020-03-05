@@ -9,4 +9,4 @@ build/
 
 ### Other Sources
 HELP.md
-/src/java/ru/sbt/twitter/database/postgres/postgresql/pgdata
+/src/main/java/ru/sbt/twitter/database/postgres/pgdata/

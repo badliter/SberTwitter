@@ -1,14 +1,15 @@
 package ru.sbt.twitter.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-public class FeedCompositeKey implements Serializable {
+public class OwnerSubscriptionsCompositeKey implements Serializable {
     private Long ownerid;
     private Long userid;
-    private Long twittid;
 }

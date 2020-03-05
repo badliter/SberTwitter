@@ -1,26 +1,24 @@
 package ru.sbt.twitter.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@IdClass(FeedCompositeKey.class)
-@Table(name = "feed", schema = "feed_cfg")
+@IdClass(TweetsCompositeKey.class)
+@Table(name = "tweets", schema = "feed_cfg")
 @Data
-public class FeedTable {
-    @Id
-    @Column(name = "ownerid")
-    private Long ownerid;
-
+@NoArgsConstructor
+public class Tweets {
     @Id
     @Column(name = "userid")
     private Long userid;
 
     @Id
-    @Column(name = "twittid")
-    private Long twittid;
+    @Column(name = "tweetid")
+    private Long tweetid;
 
     @Column(name = "content")
     private String content;
