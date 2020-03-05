@@ -14,14 +14,14 @@ public class FeedController {
     private final RestTemplate template;
 
     @GetMapping("/feed")
-    public List<Twitt> getFeed() {
+    public List<Tweet> getFeed() {
         return Arrays.asList(
-                twitt(1),
-                twitt(2)
+                tweet(1),
+                tweet(2)
         );
     }
 
-    private Twitt twitt(int id) {
-            return template.getForObject("http://twitts/" + id, Twitt.class);
+    private Tweet tweet(int id) {
+            return template.getForObject("http://tweets/" + id, Tweet.class);
     }
 }

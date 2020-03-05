@@ -1,4 +1,4 @@
-package ru.sbt.twitter.twitts.twitterroot;
+package ru.sbt.twitter.tweets.twitterroot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
