@@ -13,17 +13,16 @@ public class CommentsService {
 
     public List<Comment> getAllComments() {
         List<Comment> comments = new ArrayList<>();
-        commentsRepository.findAll().forEach(person -> comments.add(person));
+        commentsRepository.findAll().forEach(comments::add);
         return comments;
     }
 
     public Comment getCommentById(int id) {
-        System.out.println("getting");
         return commentsRepository.findById(id).get();
     }
 
-    public void saveOrUpdate(Comment person) {
-        commentsRepository.save(person);
+    public void saveOrUpdate(Comment comment) {
+        commentsRepository.save(comment);
     }
 
     public void delete(int id) {
