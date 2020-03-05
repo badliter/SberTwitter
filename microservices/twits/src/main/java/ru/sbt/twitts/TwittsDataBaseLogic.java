@@ -12,7 +12,7 @@ public class TwittsDataBaseLogic {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    List getAllTwitts(long user_id){
+    List<Twitt> getAllTwitts(long user_id){
         return jdbcTemplate.query("SELECT * FROM TWITTS WHERE USER_ID = ?",
                 new Object[]{user_id},
                 new BeanPropertyRowMapper(Twitt.class));
