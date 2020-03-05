@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import ru.sbt.twitter.entity.FeedEntity;
+import ru.sbt.twitter.service.FeedService;
 import ru.sbt.twitter.Twitt;
 
 import java.util.Arrays;
@@ -16,6 +18,8 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class FeedController {
     private final RestTemplate template;
+    private final FeedService feedService;
+
 
     /**
      * Получение всей ленты для пользователя
@@ -30,6 +34,10 @@ public class FeedController {
     ResponseEntity<String> getTimeline(@PathVariable("user_id") Long user_id,
                                        @RequestParam("period") Date period,
                                        @RequestParam("sorted") Boolean sorted) {
+        List<FeedEntity> news = feedService.getFeed(user_id);
+        for (FeedEntity entity:news) {
+            System.out.println(entity);
+        }
         return new ResponseEntity<>("GET Response : "
                 + user_id + ", " + period + ", " + sorted, OK);
     }
