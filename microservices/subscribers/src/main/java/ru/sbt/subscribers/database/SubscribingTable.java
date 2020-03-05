@@ -3,7 +3,7 @@ package ru.sbt.subscribers.database;
 import javax.persistence.*;
 
 @Entity
-@IdClass(SubscribingCompositeKey.class)
+@IdClass(Subscribing.class)
 @Table(name="SUBSCRIBING")
 public class SubscribingTable {
     @Id
