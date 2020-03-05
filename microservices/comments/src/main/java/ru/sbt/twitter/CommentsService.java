@@ -18,7 +18,7 @@ public class CommentsService {
     }
 
     public Comment getCommentById(int id) {
-        return commentsRepository.findById(id).get();
+        return commentsRepository.findById(id).orElse(null);
     }
 
     public void saveOrUpdate(Comment comment) {
