@@ -12,13 +12,10 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class Comment {
-
     @Id
     @GeneratedValue
     private Integer id;
     private LocalDateTime creationTime;
     private String author;
     private String content;
-
-
 }
