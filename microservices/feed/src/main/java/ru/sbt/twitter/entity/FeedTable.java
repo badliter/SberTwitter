@@ -7,20 +7,20 @@ import java.sql.Timestamp;
 
 @Entity
 @IdClass(FeedCompositeKey.class)
-@Table(name = "feed")
+@Table(name = "feed", schema = "feed_cfg")
 @Data
 public class FeedTable {
     @Id
-    @Column(name = "owner_id")
-    private Long owner_id;
+    @Column(name = "ownerid")
+    private Long ownerid;
 
     @Id
-    @Column(name = "user_id")
-    private Long user_id;
+    @Column(name = "userid")
+    private Long userid;
 
     @Id
-    @Column(name = "twitt_id")
-    private Long twitt_id;
+    @Column(name = "twittid")
+    private Long twittid;
 
     @Column(name = "content")
     private String content;

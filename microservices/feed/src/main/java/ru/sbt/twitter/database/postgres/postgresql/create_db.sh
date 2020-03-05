@@ -11,11 +11,11 @@ psql -v ON_ERROR_STOP=1 --username feed_admin --dbname feed_db <<-EOSQL
 EOSQL
 psql -v ON_ERROR_STOP=1 --username feed_admin --dbname feed_db <<-EOSQL
   CREATE TABLE FEED(
-  owner_id BIGINT NOT NULL,
-  user_id BIGINT NOT NULL,
-  twitt_id BIGINT NOT NULL,
+  ownerId BIGINT NOT NULL,
+  userId BIGINT NOT NULL,
+  twittId BIGINT NOT NULL,
   content TEXT,
   date TIMESTAMP,
-  PRIMARY KEY(owner_id,user_id,twitt_id)
+  PRIMARY KEY(ownerId,userId,twittId)
 ) TABLESPACE feed_cfg_data;
 EOSQL

@@ -21,6 +21,19 @@ public class FeedController {
     private final FeedService feedService;
 
 
+
+
+    /**
+     * TODO
+     * @return
+     */
+    @GetMapping("/feed/{userid}")
+    public List<FeedTable> getFeed(@PathVariable("userid") Long userid) {
+        List<FeedTable> news = feedService.getFeed(userid);
+        return news;
+    }
+
+
     /**
      * Получение всей ленты для пользователя
      *
@@ -34,25 +47,10 @@ public class FeedController {
     ResponseEntity<String> getTimeline(@PathVariable("user_id") Long user_id,
                                        @RequestParam("period") Date period,
                                        @RequestParam("sorted") Boolean sorted) {
-        List<FeedTable> news = feedService.getFeed(user_id);
-        for (FeedTable entity:news) {
-            System.out.println(entity);
-        }
         return new ResponseEntity<>("GET Response : "
                 + user_id + ", " + period + ", " + sorted, OK);
     }
 
-    /**
-     * TODO
-     * @return
-     */
-    @GetMapping("/feed")
-    public List<Twitt> getFeed() {
-        return Arrays.asList(
-                twitt(1),
-                twitt(2)
-        );
-    }
 
     private Twitt twitt(int id) {
         return template.getForObject("http://twitts/" + id, Twitt.class);

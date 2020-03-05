@@ -17,8 +17,8 @@ public class FeedService {
         this.feedRepository = feedRepository;
     }
 
-    public List<FeedTable> getFeed(Long user_id) {
-        List<FeedTable> news = feedRepository.findFeedTablesByUser_id(user_id);
+    public List<FeedTable> getFeed(Long ownerId) {
+        List<FeedTable> news = feedRepository.findByOwnerid(ownerId);
         return news;
     }
 }
