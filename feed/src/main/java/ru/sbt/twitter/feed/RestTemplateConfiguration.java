@@ -1,4 +1,4 @@
-package ru.sbt.twitter;
+package ru.sbt.twitter.feed;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

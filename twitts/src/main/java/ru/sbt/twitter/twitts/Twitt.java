@@ -1,4 +1,4 @@
-package ru.sbt.twitter;
+package ru.sbt.twitter.twitts;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

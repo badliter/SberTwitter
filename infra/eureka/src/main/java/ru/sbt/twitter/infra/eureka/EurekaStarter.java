@@ -1,4 +1,4 @@
-package ru.sbt.twitter;
+package ru.sbt.twitter.infra.eureka;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;

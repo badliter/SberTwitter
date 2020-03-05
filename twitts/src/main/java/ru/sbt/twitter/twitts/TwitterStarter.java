@@ -1,4 +1,4 @@
-package ru.sbt.twitter;
+package ru.sbt.twitter.twitts;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -7,8 +7,8 @@ import static org.springframework.boot.SpringApplication.run;
 
 @EnableEurekaClient
 @SpringBootApplication
-public class FeedStarter {
+public class TwitterStarter {
     public static void main(String[] args) {
-        run(FeedStarter.class);
+        run(TwitterStarter.class);
     }
 }

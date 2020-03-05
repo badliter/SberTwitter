@@ -1,4 +1,4 @@
-package ru.sbt.twitter;
+package ru.sbt.twitter.feed;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

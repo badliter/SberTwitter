@@ -1,4 +1,4 @@
-package ru.sbt.twitter;
+package ru.sbt.twitter.twitts;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
