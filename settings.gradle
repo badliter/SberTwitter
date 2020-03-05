@@ -1,4 +1,4 @@
-rootProject.name = 'twitter-root'
+rootProject.name = 'SberTwitter'
 
 include ':tweets',
         ':feed',
