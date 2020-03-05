@@ -21,7 +21,7 @@ public class CommentsController {
         return commentsService.getCommentById(id);
     }
 
-    @DeleteMapping("/delete/comment/{id}")
+    @DeleteMapping("/comments/{id}")
     private void deleteComment(@PathVariable("id") int id) {
         commentsService.delete(id);
     }
