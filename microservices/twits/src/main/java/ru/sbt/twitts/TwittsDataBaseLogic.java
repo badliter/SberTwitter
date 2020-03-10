@@ -1,6 +1,7 @@
 package ru.sbt.twitts;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,16 +20,24 @@ public class TwittsDataBaseLogic {
     }
 
     Twitt getTwitt(long user_id, long twitt_id){
-        return (Twitt) jdbcTemplate.queryForObject("SELECT * FROM TWITTS WHERE USER_ID = ? AND TWITT_ID = ?;",
-                new Object[]{user_id, twitt_id},
-                new BeanPropertyRowMapper(Twitt.class));
+        try {
+            return (Twitt) jdbcTemplate.queryForObject("SELECT * FROM TWITTS WHERE USER_ID = ? AND TWITT_ID = ?;",
+                    new Object[]{user_id, twitt_id},
+                    new BeanPropertyRowMapper(Twitt.class));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     Twitt getTwittWithMaxId(long user_id){
-        return (Twitt) jdbcTemplate.queryForObject("SELECT TOP 1 * FROM TWITTS WHERE USER_ID = ? ORDER BY TWITT_ID DESC;",
-                new Object[]{user_id},
-                new BeanPropertyRowMapper(Twitt.class));
-    }
+        try {
+            return (Twitt) jdbcTemplate.queryForObject("SELECT TOP 1 * FROM TWITTS WHERE USER_ID = ? ORDER BY TWITT_ID DESC;",
+                    new Object[]{user_id},
+                    new BeanPropertyRowMapper(Twitt.class));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+}
 
     Long getNumberOfTwitts(long user_id){
         return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM TWITTS WHERE USER_ID = ?;",
