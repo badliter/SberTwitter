@@ -1,4 +1,4 @@
-package ru.sbt.twitts;
+package ru.sbt.twitter.twitts;
 
 import org.springframework.http.ResponseEntity;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
