@@ -20,12 +20,18 @@ public class TwittsController {
 
     @GetMapping("getTwitt/{user_id}/{twitt_id}")
     public ResponseEntity<Twitt> getTwitt(@PathVariable("user_id") long user_id, @PathVariable("twitt_id") long twitt_id){
+        Twitt twitt = dao.getTwitt(user_id, twitt_id);
+        if (twitt == null)
+            return ControllerErrorsHandler.badRequest(user_id, twitt_id);
         return new ResponseEntity<>(dao.getTwitt(user_id, twitt_id), OK);
     }
 
     @GetMapping("getLastTwittId/{user_id}")
-    public ResponseEntity<Long> getLastTwittId(@PathVariable("user_id") long user_id){
-        return new ResponseEntity<>(dao.getTwittWithMaxId(user_id).getTwitt_id(), OK);
+    public ResponseEntity<Long> getLastTwittId(@PathVariable("user_id") long user_id) {
+        Twitt twitt = dao.getTwittWithMaxId(user_id);
+        if (twitt == null)
+            return ControllerErrorsHandler.badRequest(user_id);
+        return new ResponseEntity<>(twitt.getTwitt_id(), OK);
     }
 
     @GetMapping("getNumberOfTwitts/{user_id}")
