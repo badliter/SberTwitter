@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Table(name = "tweets", schema = "feed_cfg")
 @Data
 @NoArgsConstructor
-public class Tweets {
+public class Tweet {
     @Id
     @Column(name = "userid")
     private Long userid;

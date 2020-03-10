@@ -13,15 +13,15 @@ psql -v ON_ERROR_STOP=1 --username feed_admin --dbname feed_db <<-EOSQL
   CREATE TABLE USERSINFO(
   userid BIGINT NOT NULL PRIMARY KEY,
   login TEXT,
-  name VARCHAR(500),
-  surname VARCHAR(500)
+  firstname VARCHAR(500),
+  lastname VARCHAR(500)
 ) TABLESPACE feed_cfg_data;
   CREATE TABLE TWEETS(
   tweetid BIGINT NOT NULL,
   userid BIGINT REFERENCES USERSINFO(userid),
   content TEXT,
   date TIMESTAMP,
-  PRIMARY KEY(twittid,userid)
+  PRIMARY KEY(tweetid,userid)
 ) TABLESPACE feed_cfg_data;
   CREATE TABLE OWNERSUBSCRIPTIONS(
   ownerid BIGINT NOT NULL,

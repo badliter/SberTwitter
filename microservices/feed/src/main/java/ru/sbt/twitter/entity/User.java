@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usersinfo", schema = "feed_cfg")
 @Data
-public class UsersInfoTable {
+public class User {
     @Id
     @Column(name = "userid")
     private Long userid;
@@ -18,9 +18,9 @@ public class UsersInfoTable {
     @Column(name = "login")
     private String login;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "firstname")
+    private String firstname;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "lastname")
+    private String lastname;
 }
