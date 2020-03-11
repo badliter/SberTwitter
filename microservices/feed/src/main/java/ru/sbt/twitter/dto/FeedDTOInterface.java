@@ -8,4 +8,7 @@ public interface FeedDTOInterface {
     Long getTweetid();
     String getContent();
     Timestamp getDate();
+    String getLogin();
+    String getFirstname();
+    String getLastname();
 }

@@ -1,5 +1,6 @@
 package ru.sbt.twitter.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.sql.Timestamp;
 @Table(name = "tweets", schema = "feed_cfg")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Tweet {
     @Id
     @Column(name = "userid")

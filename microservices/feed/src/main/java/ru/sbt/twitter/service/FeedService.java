@@ -34,6 +34,8 @@ public class FeedService {
     public void addSubscriber(OwnerSubscriptions sub){
         subsRepository.save(sub);
     }
+    public void addTweet(Tweet tweet){feedRepository.save(tweet);}
+    public void addUser(User user){usersRepository.save(user);}
     public User getUserInfoById(Long userId){
         return usersRepository.findByUserid(userId);
     }

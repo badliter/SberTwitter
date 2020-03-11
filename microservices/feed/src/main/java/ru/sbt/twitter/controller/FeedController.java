@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import ru.sbt.twitter.Twitt;
 import ru.sbt.twitter.dto.FeedDTOInterface;
 import ru.sbt.twitter.entity.OwnerSubscriptions;
 import ru.sbt.twitter.entity.Tweet;
 import ru.sbt.twitter.entity.User;
 import ru.sbt.twitter.service.FeedService;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -37,13 +38,28 @@ public class FeedController {
         User user = feedService.getUserInfoById(userid);
         return new ResponseEntity<>(user, OK);
     }
+    @GetMapping("/onlineTweets/{userid}")
+    public ResponseEntity<?> getOnlineTweets(@PathVariable("userid") Long userid) {
+        return new ResponseEntity<>(template.getForEntity("http://twitts/getAllTwitts/" + userid, Twitt[].class), OK);
+    }
     @PostMapping("/addSubscriber/{ownerid}")
     public void getTwitts(@PathVariable("ownerid") Long ownerid,
-                                       @RequestParam("userid") Long userid) {
+                          @RequestParam("userid") Long userid) {
         OwnerSubscriptions subs = new OwnerSubscriptions(ownerid, userid);
         feedService.addSubscriber(subs);
     }
+    @PostMapping("/addTweet")
+    public void getTwitts(@RequestParam("userid") Long userid,@RequestParam("tweetid") Long tweetid,
+                            @RequestParam("content") String content, @RequestParam("date") Timestamp date) {
 
+        Tweet tweet = new Tweet(userid, tweetid, content, date);
+        feedService.addTweet(tweet);
+    }
+    @PostMapping("/addUser")
+    public void getTwitts(@RequestParam("userid") Long userid,@RequestParam("login") String login,
+                          @RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname) {
 
-
+        User user = new User(userid, login, firstname, lastname);
+        feedService.addUser(user);
+    }
 }

@@ -1,5 +1,6 @@
 package ru.sbt.twitter.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usersinfo", schema = "feed_cfg")
 @Data
+@AllArgsConstructor
 public class User {
     @Id
     @Column(name = "userid")
