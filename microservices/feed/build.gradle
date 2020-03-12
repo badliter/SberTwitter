@@ -30,3 +30,4 @@ dockerCompose {
     captureContainersOutput = true
     dockerComposeWorkingDirectory = './src/main/java/ru/sbt/twitter/database/postgres/'
 }
+build.finalizedBy(composeUp)
