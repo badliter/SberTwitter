@@ -1,5 +1,0 @@
-rootProject.name = 'twitter-root'
-
-include ':twits',
-        ':feed',
-        ':infra:eureka'

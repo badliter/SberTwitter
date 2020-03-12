@@ -1,0 +1,8 @@
+rootProject.name = 'SberTwitter'
+
+
+include ':twits',
+        ':feed',
+        ':comments',
+        ':infra:eureka',
+        ':subscribers'
