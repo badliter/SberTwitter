@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,15 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-
-const useStyles = makeStyles(() => ({
-    root: {
-        display: "grid",
-    },
-    typography: {
-        fontSize: "13px",
-    },
-}));
+import useStyles from "./tweet-style";
 
 
 const Tweet = (props) => {

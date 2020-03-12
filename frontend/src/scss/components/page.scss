@@ -1,8 +1,17 @@
 .page {
-    &__feed {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-column-gap: $margin-medium;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-column-gap: $margin-medium;
+
+    &__header {
+        grid-column: 1/-1;
         margin-top: $margin-medium;
+        margin-bottom: $margin-medium;
+
+        h4 {
+            color: $color-black;
+            font-weight: bold;
+        }
     }
 }

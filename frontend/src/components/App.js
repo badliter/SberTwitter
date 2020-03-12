@@ -2,7 +2,8 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Menu from "./menu/menu";
 import PrivateRoute from "../routes/private-route";
-import TweetList from "./tweet/tweet-list";
+import Feed from "../pages/feed";
+import Profile from "../pages/profile";
 
 const App = () => (
     <div className="container">
@@ -13,14 +14,10 @@ const App = () => (
                     <p>Login</p>
                 </Route>
                 <PrivateRoute exact path="/" isAuthenticated>
-                    <div className="page page__feed">
-                        <div className="tweet__grid">
-                            <TweetList />
-                        </div>
-                    </div>
+                    <Feed />
                 </PrivateRoute>
                 <PrivateRoute exact path="/profile" isAuthenticated>
-                    <p>Profile</p>
+                    <Profile />
                 </PrivateRoute>
                 <Route path="*">
                     <Redirect to="/" />
