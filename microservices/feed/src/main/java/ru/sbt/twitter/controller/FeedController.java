@@ -23,31 +23,24 @@ public class FeedController {
     private final RestTemplate template;
     private final FeedService feedService;
 
-
-    /**
-     * Получение всей ленты для пользователя
-     *
-     * @param user_id - id пользователя
-     * @param period  - период за который хотим получить ленту
-     * @param sorted  - сортировка
-     * @return
-     */
-    @GetMapping(value = "/getTwits/{user_id}")
-    public @ResponseBody
-    ResponseEntity<String> getTimeline(@PathVariable("user_id") Long user_id,
-                                       @RequestParam("period") Date period,
-                                       @RequestParam("sorted") Boolean sorted) {
-        List<FeedTable> news = feedService.getFeed(user_id);
-        for (FeedTable entity:news) {
-            System.out.println(entity);
-        }
-        return new ResponseEntity<>("GET Response : "
-                + user_id + ", " + period + ", " + sorted, OK);
+    @GetMapping("/feed/{ownerid}")
+    public ResponseEntity<List<FeedDTOInterface>> getFeed(@PathVariable("ownerid") Long ownerid) {
+        List<FeedDTOInterface> feed = feedService.getFeed(ownerid);
+        return new ResponseEntity<>(feed, OK);
     }
-
-
-    private Twitt twitt(int id) {
-        return template.getForObject("http://twitts/" + id, Twitt.class);
+    @GetMapping("/tweets/{userid}")
+    public ResponseEntity<Set<Tweet>> getTweets(@PathVariable("userid") Long userid) {
+        Set<Tweet> tweets = feedService.getTweets(userid);
+        return new ResponseEntity<>(tweets, OK);
+    }
+    @GetMapping("/userinfo/{userid}")
+    public ResponseEntity<User> getUser(@PathVariable("userid") Long userid) {
+        User user = feedService.getUserInfoById(userid);
+        return new ResponseEntity<>(user, OK);
+    }
+    @GetMapping("/onlineTweets/{userid}")
+    public ResponseEntity<?> getOnlineTweets(@PathVariable("userid") Long userid) {
+        return new ResponseEntity<>(template.getForEntity("http://twitts/getAllTwitts/" + userid, Twitt[].class), OK);
     }
     @PostMapping("/addSubscriber/{ownerid}")
     public void getTwitts(@PathVariable("ownerid") Long ownerid,
@@ -57,7 +50,16 @@ public class FeedController {
     }
     @PostMapping("/addTweet")
     public void getTwitts(@RequestParam("userid") Long userid,@RequestParam("tweetid") Long tweetid,
-                            @RequestParam("content") String content, @RequestParam("date") Timestamp date) {
+                          @RequestParam("content") String content, @RequestParam("date") Timestamp date) {
 
+        Tweet tweet = new Tweet(userid, tweetid, content, date);
+        feedService.addTweet(tweet);
+    }
+    @PostMapping("/addUser")
+    public void getTwitts(@RequestParam("userid") Long userid,@RequestParam("login") String login,
+                          @RequestParam("firstname") String firstname, @RequestParam("lastname") String lastname) {
 
+        User user = new User(userid, login, firstname, lastname);
+        feedService.addUser(user);
+    }
 }
