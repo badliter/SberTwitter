@@ -1,0 +1,9 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client',
+            'org.springframework.boot:spring-boot-starter-jdbc',
+            'com.h2database:h2',
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+            'io.jsonwebtoken:jjwt:0.2',
+            'org.liquibase:liquibase-gradle-plugin:1.1.0'
+}
