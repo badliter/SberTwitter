@@ -1,0 +1,10 @@
+.tweet {
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: $margin-medium;
+        align-self: start;
+    }
+
+    font-size: $font-size-small;
+}

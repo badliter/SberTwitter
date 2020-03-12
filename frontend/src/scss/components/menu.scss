@@ -1,0 +1,41 @@
+.menu {
+    display: grid;
+    align-items: center;
+    background-color: #007aff;
+    min-height: 4.6rem;
+    padding: $padding-small / 2;
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-column-gap: $margin-large;
+        color: $color-white;
+    }
+
+    &__logo {
+        display: grid;
+        align-items: center;
+
+        h4 {
+            font-weight: 500;
+            cursor: pointer;
+            line-height: $line-height-default;
+        }
+    }
+
+    &__tabs {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        justify-items: end;
+    }
+
+    &__button {
+        align-self: center;
+
+        button {
+            color: $color-white;
+            font-size: $font-size-small;
+            border-color: $color-white;
+        }
+    }
+}

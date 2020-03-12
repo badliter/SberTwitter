@@ -12,14 +12,14 @@ const TweetList = () => {
     }, []);
 
     return (
-        <div>
+        <React.Fragment>
             {tweetList.map((tweet) => (
                 <Tweet
                     key={uuidv4()}
                     tweet={tweet}
                 />
             ))}
-        </div>
+        </React.Fragment>
     );
 };
 
