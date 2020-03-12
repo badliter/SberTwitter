@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import ru.sbt.twitter.Twitt;
 import ru.sbt.twitter.dto.FeedDTOInterface;
+import ru.sbt.twitter.entity.OwnerSubscriptions;
+import ru.sbt.twitter.entity.Tweet;
+import ru.sbt.twitter.entity.User;
 import ru.sbt.twitter.service.FeedService;
 
-import java.util.Arrays;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -20,22 +23,6 @@ public class FeedController {
     private final RestTemplate template;
     private final FeedService feedService;
 
-
-    /**
-     *
-     *
-     * @return
-     */
-    @GetMapping("/feed/{userid}")
-    public @ResponseBody List<FeedDTOInterface> getFeed(@PathVariable("userid") Long userid) {
-        List<FeedDTOInterface> news = feedService.getFeed(userid);
-        return news;
-    }
-
-//    @PostMapping("/addTwitt")
-//    public void postTwitt(@RequestBody List<TwittsTable> twittsTables){
-//        feedService.addTwitts(twittsTables);
-//    }
 
     /**
      * Получение всей ленты для пользователя
@@ -50,6 +37,10 @@ public class FeedController {
     ResponseEntity<String> getTimeline(@PathVariable("user_id") Long user_id,
                                        @RequestParam("period") Date period,
                                        @RequestParam("sorted") Boolean sorted) {
+        List<FeedTable> news = feedService.getFeed(user_id);
+        for (FeedTable entity:news) {
+            System.out.println(entity);
+        }
         return new ResponseEntity<>("GET Response : "
                 + user_id + ", " + period + ", " + sorted, OK);
     }
@@ -58,6 +49,15 @@ public class FeedController {
     private Twitt twitt(int id) {
         return template.getForObject("http://twitts/" + id, Twitt.class);
     }
+    @PostMapping("/addSubscriber/{ownerid}")
+    public void getTwitts(@PathVariable("ownerid") Long ownerid,
+                          @RequestParam("userid") Long userid) {
+        OwnerSubscriptions subs = new OwnerSubscriptions(ownerid, userid);
+        feedService.addSubscriber(subs);
+    }
+    @PostMapping("/addTweet")
+    public void getTwitts(@RequestParam("userid") Long userid,@RequestParam("tweetid") Long tweetid,
+                            @RequestParam("content") String content, @RequestParam("date") Timestamp date) {
 
 
 }
