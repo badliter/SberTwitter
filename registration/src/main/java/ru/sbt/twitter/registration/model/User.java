@@ -1,7 +1,7 @@
 package ru.sbt.twitter.registration.model;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
