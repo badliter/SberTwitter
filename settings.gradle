@@ -5,4 +5,5 @@ include ':twits',
         ':feed',
         ':comments',
         ':infra:eureka',
-        ':subscribers'
+        ':subscribers',
+        ':registration'
