@@ -8,7 +8,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.builders.PathSelectors;
 
-// http://localhost/swagger-ui.html
+// http://localhost:8050/swagger-ui.html
 
 @Configuration
 @EnableSwagger2
