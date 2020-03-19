@@ -6,4 +6,5 @@ include ':twits',
         ':comments',
         ':infra:eureka',
         ':subscribers',
-        ':registration'
+        ':registration',
+        'feedDb'

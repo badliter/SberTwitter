@@ -9,27 +9,3 @@ dependencies {
             'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
 }
 
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "gradle.plugin.com.avast.gradle:gradle-docker-compose-plugin:0.10.9"
-    }
-}
-
-apply plugin: "com.avast.gradle.docker-compose"
-
-dockerCompose {
-    useComposeFiles = ['docker-compose.yml']
-    buildBeforeUp = true
-    buildBeforePull = true
-    ignorePullFailure = false
-    ignorePushFailure = false
-    pushServices = []
-    captureContainersOutput = true
-    dockerComposeWorkingDirectory = './src/main/java/ru/sbt/twitter/database/postgres/'
-}
-build.finalizedBy(composeUp)
