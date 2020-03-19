@@ -1,4 +1,4 @@
-package ru.sbt.twitter.twitts;
+package ru.sbt.twitter.tweets;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.builders.PathSelectors;
 
-// http://localhost/swagger-ui.html
+// http://localhost:9050/swagger-ui.html
 
 @Configuration
 @EnableSwagger2

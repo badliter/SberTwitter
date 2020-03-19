@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.sbt.twitter.subscribers.database.DataBaseLogic;
-import ru.sbt.twitter.subscribers.database.Subscribing;
+import ru.sbt.twitter.subscribers.database.SubscriptionsTable;
 
 import java.util.List;
 
@@ -15,23 +15,23 @@ public class SubscribersController {
     @Autowired
     private DataBaseLogic dao;
 
-    @GetMapping("/getSubscribing/{user_id}")
-    public ResponseEntity<List<Long>> getSubscribing(@PathVariable("user_id") long user_id) {
-        return new ResponseEntity<>(dao.getSubscribing(user_id), OK);
+    @GetMapping("/getsubscriptions/{user_id}")
+    public ResponseEntity<List<Long>> getSubscriptions(@PathVariable("user_id") long userId) {
+        return new ResponseEntity<>(dao.getSubscriptions(userId), OK);
     }
 
-    @GetMapping("/getSubscribers/{user_id}")
-    public ResponseEntity<List<Long>> getSubscribers(@PathVariable("user_id") long user_id) {
-        return new ResponseEntity<>(dao.getSubscribers(user_id), OK);
+    @GetMapping("/getsubscribers/{user_id}")
+    public ResponseEntity<List<Long>> getSubscribers(@PathVariable("user_id") long userId) {
+        return new ResponseEntity<>(dao.getSubscribers(userId), OK);
     }
 
-    @PostMapping("/addSubscribing")
-    public ResponseEntity<String> addSubscribing(@RequestBody Subscribing subscribing){
-        return new ResponseEntity<>(dao.insertSubscribing(subscribing), OK);
+    @PostMapping("/addsubscription")
+    public ResponseEntity<String> addSubscription(@RequestBody SubscriptionsTable subscription){
+        return new ResponseEntity<>(dao.insertSubscription(subscription), OK);
     }
 
-    @PostMapping("/deleteSubscribing")
-    public ResponseEntity<String> deleteSubscribing(@RequestBody Subscribing subscribing){
-        return new ResponseEntity<>(dao.deleteSubscribing(subscribing), OK);
+    @PostMapping("/deletesubscription")
+    public ResponseEntity<String> deleteSubscription(@RequestBody SubscriptionsTable subscription){
+        return new ResponseEntity<>(dao.deleteSubscription(subscription), OK);
     }
 }

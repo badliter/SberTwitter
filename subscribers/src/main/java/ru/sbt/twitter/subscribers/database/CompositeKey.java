@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-public class Subscribing implements Serializable {
-    private Long user_id;
-    private Long subscribing_id;
+public class CompositeKey implements Serializable {
+    private Long ownerid;
+    private Long userid;
 }

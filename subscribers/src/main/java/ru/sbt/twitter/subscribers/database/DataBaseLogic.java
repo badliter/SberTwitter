@@ -11,29 +11,29 @@ public class DataBaseLogic {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<Long> getSubscribing(long user_id){
-        return jdbcTemplate.queryForList("SELECT SUBSCRIBING_ID FROM SUBSCRIBING WHERE USER_ID = ?",
+    public List<Long> getSubscriptions(long user_id){
+        return jdbcTemplate.queryForList("SELECT SUBSCRIPTION_ID FROM SUBSCRIPTIONS WHERE USER_ID = ?",
                 new Object[]{user_id},
                 Long.class);
     }
 
     public List<Long> getSubscribers(long user_id){
-        return jdbcTemplate.queryForList("SELECT USER_ID AS SUBSCRIBERS_ID FROM SUBSCRIBING WHERE SUBSCRIBING_ID = ?",
+        return jdbcTemplate.queryForList("SELECT USER_ID AS SUBSCRIBERS_ID FROM SUBSCRIPTIONS WHERE SUBSCRIPTION_ID = ?",
                 new Object[]{user_id},
                 Long.class);
     }
 
-    public String insertSubscribing(Subscribing subscribing) {
-        jdbcTemplate.update("INSERT INTO SUBSCRIBING (USER_ID, SUBSCRIBING_ID)  VALUES (?, ?);",
-                subscribing.getUser_id(),
-                subscribing.getSubscribing_id());
-        return "Subscribing was added!!!";
+    public String insertSubscription(SubscriptionsTable subscription) {
+        jdbcTemplate.update("INSERT INTO SUBSCRIPTIONS (USER_ID, SUBSCRIPTION_ID)  VALUES (?, ?);",
+                subscription.getOwnerid(),
+                subscription.getUserid());
+        return "Subscription was added!!!";
     }
 
-    public String deleteSubscribing(Subscribing subscribing) {
-        jdbcTemplate.update("DELETE FROM SUBSCRIBING WHERE USER_ID = ? AND SUBSCRIBING_ID = ?;",
-                subscribing.getUser_id(),
-                subscribing.getSubscribing_id());
-        return "Subscribing was deleted!!!";
+    public String deleteSubscription(SubscriptionsTable subscription) {
+        jdbcTemplate.update("DELETE FROM SUBSCRIPTIONS WHERE USER_ID = ? AND SUBSCRIPTION_ID = ?;",
+                subscription.getOwnerid(),
+                subscription.getUserid());
+        return "Subscription was deleted!!!";
     }
 }
