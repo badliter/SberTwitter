@@ -11,8 +11,6 @@ import ru.sbt.twitter.entity.User;
 import ru.sbt.twitter.service.FeedService;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -44,15 +42,8 @@ public class FeedController {
 
     @GetMapping("/onlineFeed/{userid}")
     public ResponseEntity<?> getOnlineFeed(@PathVariable("userid") Long userid) {
-        Long[] users = template.getForEntity(
-                "http://subscribers/getsubscriptions/" + userid, Long[].class).getBody();
-        List<Tweet> allTweets = new ArrayList<>();
-        for (Long user : users) {
-            Tweet[] tweets = template.getForEntity(
-                            "http://tweets/getalltweets/" + user, Tweet[].class).getBody();
-            allTweets.addAll(Arrays.asList(tweets));
-        }
-        return new ResponseEntity<>(allTweets, OK);
+        List<Tweet> tweets = feedService.getTweetsOnline(userid);
+        return new ResponseEntity<>(tweets, OK);
     }
 
     @PostMapping("/addSubscriber/{ownerid}")

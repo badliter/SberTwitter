@@ -16,5 +16,6 @@ public interface FeedRepository extends JpaRepository<Tweet, Long> {
             " WHERE own.ownerid = :ownerId ",
             nativeQuery = true)
     List<FeedDTOInterface> findFeedByOwnerId(@Param("ownerId") Long userId);
+
     Set<Tweet> findByUserid(Long userId);
 }
