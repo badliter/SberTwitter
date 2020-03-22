@@ -4,22 +4,26 @@ import Tweet from "./tweet";
 
 const TweetList = () => {
     const [tweetList, setTweetList] = useState([]);
+    const ownerId = "1";
 
     useEffect(() => {
-        fetch(`${process.env.API_URL}/getAllTwitts`)
+        fetch(`${process.env.API_URL}/getAllTwitts/${ownerId}`)
             .then((response) => response.json())
             .then((json) => setTweetList(json.tweets));
     }, []);
 
     return (
-        <React.Fragment>
+        <>
             {tweetList.map((tweet) => (
                 <Tweet
                     key={uuidv4()}
-                    tweet={tweet}
+                    authorName={tweet.authorName}
+                    authorSurname={tweet.authorSurname}
+                    content={tweet.content}
+                    date={tweet.date}
                 />
             ))}
-        </React.Fragment>
+        </>
     );
 };
 

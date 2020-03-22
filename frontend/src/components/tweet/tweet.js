@@ -9,26 +9,18 @@ import Typography from "@material-ui/core/Typography";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
-import useStyles from "./tweet-style";
+import Box from "@material-ui/core/Box";
+import * as moment from "moment";
 
-
-const Tweet = (props) => {
-// const {
-//     tweet_id,
-//     user_id,
-//     content,
-//     timestamp,
-// } = props.tweet;
-
-    const classes = useStyles();
-
-    return (
-        <Card className={classes.root}>
+const Tweet = ({
+    authorName, authorSurname, content, date,
+}) => (
+    <Box mb={3}>
+        <Card>
             <CardHeader
-                className={classes.header}
                 avatar={(
                     <Avatar aria-label="recipe">
-                        R
+                        {authorName[0]}
                     </Avatar>
                 )}
                 action={(
@@ -36,27 +28,24 @@ const Tweet = (props) => {
                         <MoreVertIcon />
                     </IconButton>
                 )}
-                titleTypographyProps={{ variant: "h5" }}
-                title="Shrimp and Chorizo Paella"
-                subheaderTypographyProps={{ variant: "13px" }}
-                subheader="September 14, 2016"
+                titleTypographyProps={{ variant: "subtitle1" }}
+                title={`${authorName} ${authorSurname}`}
+                subheader={`${moment(date).format("LLL")}`}
             />
             <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p" className={classes.typography}>
-                    This impressive paella is a perfect party dish and a fun meal to cook together with your
-                    guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {content}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
-                    <FavoriteIcon style={{ fontSize: 20 }} />
+                    <FavoriteIcon fontSize="small" />
                 </IconButton>
                 <IconButton aria-label="chat bubble">
-                    <ChatBubbleIcon style={{ fontSize: 20 }} />
+                    <ChatBubbleIcon fontSize="small" />
                 </IconButton>
             </CardActions>
         </Card>
-    );
-};
-
+    </Box>
+);
 export default Tweet;

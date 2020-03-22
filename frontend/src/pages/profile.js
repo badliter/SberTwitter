@@ -1,18 +1,23 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import Subscription from "../components/subscription/subscription";
+import PageHeader from "./page-header";
 
 const Profile = () => (
-    <div className="page">
-        <div className="page__header">
-            <Typography variant="h4">
-                Профиль пользователя
-            </Typography>
-        </div>
-        <Paper />
-        <Subscription />
-    </div>
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+    >
+        <PageHeader title="Профиль" />
+        <Grid item xs={12} md={9} lg={8} xl={7}>
+            <Box mr={3} ml={3}>
+                <Subscription />
+            </Box>
+        </Grid>
+    </Grid>
 );
 
 
