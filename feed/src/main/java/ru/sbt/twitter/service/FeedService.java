@@ -1,9 +1,12 @@
 package ru.sbt.twitter.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import ru.sbt.twitter.dto.FeedDTO;
 import ru.sbt.twitter.dto.FeedDTOInterface;
 import ru.sbt.twitter.entity.OwnerSubscriptions;
 import ru.sbt.twitter.entity.Tweet;
@@ -64,5 +67,21 @@ public class FeedService {
             allTweets.addAll(Arrays.asList(tweets));
         }
         return allTweets;
+    }
+
+    public User getUserFromReg(Long userid) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = template.getForEntity("http://registration/getUser/"+userid, String.class).getBody();
+        User vo = objectMapper.readValue(json, User.class);
+        return vo;
+    }
+
+    public List<FeedDTO> getFeedOnline(Long userId) throws JsonProcessingException {
+        List<Tweet> allTweets = getTweetsOnline(userId);
+        List<FeedDTO> feed = new ArrayList<>();
+        for (Tweet tweet:allTweets) {
+            feed.add(new FeedDTO(tweet, getUserFromReg(tweet.getUserid())));
+        }
+        return feed;
     }
 }

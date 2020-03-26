@@ -1,9 +1,11 @@
 package ru.sbt.twitter.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import ru.sbt.twitter.dto.FeedDTO;
 import ru.sbt.twitter.dto.FeedDTOInterface;
 import ru.sbt.twitter.entity.OwnerSubscriptions;
 import ru.sbt.twitter.entity.Tweet;
@@ -21,6 +23,12 @@ import static org.springframework.http.HttpStatus.OK;
 public class FeedController {
     private final RestTemplate template;
     private final FeedService feedService;
+
+    @GetMapping("/getUser/{userid}")
+    public ResponseEntity<User> getUserFromReg(@PathVariable("userid") Long userid) throws JsonProcessingException {
+        User user = feedService.getUserFromReg(userid);
+        return new ResponseEntity<>(user, OK);
+    }
 
     @GetMapping("/feed/{ownerid}")
     public ResponseEntity<List<FeedDTOInterface>> getFeed(@PathVariable("ownerid") Long ownerid) {
@@ -41,9 +49,9 @@ public class FeedController {
     }
 
     @GetMapping("/onlineFeed/{userid}")
-    public ResponseEntity<?> getOnlineFeed(@PathVariable("userid") Long userid) {
-        List<Tweet> tweets = feedService.getTweetsOnline(userid);
-        return new ResponseEntity<>(tweets, OK);
+    public ResponseEntity<?> getOnlineFeed(@PathVariable("userid") Long userid) throws JsonProcessingException {
+        List<FeedDTO> feed = feedService.getFeedOnline(userid);
+        return new ResponseEntity<>(feed, OK);
     }
 
     @PostMapping("/addSubscriber/{ownerid}")
