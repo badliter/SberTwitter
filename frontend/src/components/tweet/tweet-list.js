@@ -21,8 +21,8 @@ const TweetList = () => {
             {tweetList.map((tweet) => (
                 <Tweet
                     key={uuidv4()}
-                    authorName="Max"//{tweet.authorName}
-                    authorSurname="Badanin"//{tweet.authorSurname}
+                    authorName={tweet.authorName}
+                    authorSurname={tweet.authorSurname}
                     content={tweet.content}
                     date={tweet.date}
                 />
