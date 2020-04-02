@@ -6,6 +6,7 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-data-jpa',
             'org.postgresql:postgresql:9.4-1206-jdbc42',
             'org.springframework.cloud:spring-cloud-stream-binder-rabbit',
-            'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+            'org.springframework.cloud:spring-cloud-starter-stream-rabbit',
+            'org.springframework.kafka:spring-kafka'
 }
 

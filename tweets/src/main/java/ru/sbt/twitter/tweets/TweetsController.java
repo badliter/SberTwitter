@@ -3,15 +3,30 @@ package ru.sbt.twitter.tweets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
+@RequestMapping("kafka")
 public class TweetsController {
+    private static final String TOPIC = "Feed";
     @Autowired
     private TweetsDataBaseLogic dao;
+    @Autowired
+    private KafkaTemplate<String, Tweet> kafkaTemplate;
+    /////
+    @GetMapping("sendtweet/{user_id}/{tweet_id}")
+    public ResponseEntity<Tweet> sendTweet(@PathVariable("user_id") long userId, @PathVariable("tweet_id") long tweetId){
+        Tweet tweet = dao.getTweet(userId, tweetId);
+        kafkaTemplate.send(TOPIC, tweet);
+        if (tweet == null)
+            return ControllerErrorsHandler.badRequest(userId, tweetId);
+        return new ResponseEntity<>(tweet, OK);
+    }
+    /////
 
     @GetMapping("/getalltweets/{user_id}")
     public ResponseEntity<List<Tweet>> getAllTweets(@PathVariable("user_id") long userId) {

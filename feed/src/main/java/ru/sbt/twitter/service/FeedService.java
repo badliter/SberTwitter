@@ -14,6 +14,7 @@ import ru.sbt.twitter.entity.User;
 import ru.sbt.twitter.repository.FeedRepository;
 import ru.sbt.twitter.repository.SubscribersRepository;
 import ru.sbt.twitter.repository.UsersRepository;
+import org.springframework.kafka.annotation.KafkaListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,16 @@ public class FeedService {
     private final SubscribersRepository subsRepository;
     @Autowired
     private final UsersRepository usersRepository;
+
+//    @KafkaListener(topics = "Feedasd", groupId = "group_id")
+//    public void consume(String message) {
+//        System.out.println("Consumed message: " + message);
+//    }
+//    @KafkaListener(topics = "Feed", groupId = "group_json",
+//            containerFactory = "userKafkaListenerFactory")
+//    public void consumeJson(Tweet tweet) {
+//        System.out.println("Consumed JSON Message: " + tweet);
+//    }
 
     public List<FeedDTOInterface> getFeed(Long ownerId) {
         List<FeedDTOInterface> news = feedRepository.findFeedByOwnerId(ownerId);
