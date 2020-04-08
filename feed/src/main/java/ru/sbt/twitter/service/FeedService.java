@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.sbt.twitter.dto.FeedDTO;
@@ -32,15 +33,10 @@ public class FeedService {
     @Autowired
     private final UsersRepository usersRepository;
 
-//    @KafkaListener(topics = "Feedasd", groupId = "group_id")
-//    public void consume(String message) {
-//        System.out.println("Consumed message: " + message);
-//    }
-//    @KafkaListener(topics = "Feed", groupId = "group_json",
-//            containerFactory = "userKafkaListenerFactory")
-//    public void consumeJson(Tweet tweet) {
-//        System.out.println("Consumed JSON Message: " + tweet);
-//    }
+    @KafkaListener(topics = "Feed", groupId = "kafka")
+    public void consumeJson(@Payload List<Tweet> tweet) {
+        System.out.println("Consumed JSON Message: " + tweet);
+    }
 
     public List<FeedDTOInterface> getFeed(Long ownerId) {
         List<FeedDTOInterface> news = feedRepository.findFeedByOwnerId(ownerId);

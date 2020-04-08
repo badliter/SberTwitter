@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.client.RestTemplate;
 import ru.sbt.twitter.dto.FeedDTO;
 import ru.sbt.twitter.dto.FeedDTOInterface;
 import ru.sbt.twitter.entity.OwnerSubscriptions;
@@ -21,7 +21,6 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequiredArgsConstructor
 public class FeedController {
-    private final RestTemplate template;
     private final FeedService feedService;
 
     @GetMapping("/getUser/{userid}")
