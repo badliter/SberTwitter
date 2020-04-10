@@ -15,13 +15,13 @@ public class RegistrationDBLogic {
     private JdbcTemplate jdbcTemplate;
 
     User getUserById(long user_id) {
-        return (User) jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE ID = ?",
+        return (User) jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE userId = ?",
                 new Object[]{user_id},
                 new BeanPropertyRowMapper(User.class));
     }
 
-    String signUp(User user) {
-        jdbcTemplate.update("INSERT INTO USERS (ID, USERNAME, EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, STATUS) values (?, ?, ?, ?, ?, ?, ?);",
+    User signUp(User user) {
+        jdbcTemplate.update("INSERT INTO USERS (userId, userName, email, password, firstName, lastName, status) values (?, ?, ?, ?, ?, ?, ?);",
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
@@ -29,19 +29,18 @@ public class RegistrationDBLogic {
                 user.getFirstName(),
                 user.getLastName(),
                 "ACTIVE");
-        return "You were successfully signed up";
+        return user;
 
     }
 
     User signIn(String username, String password) {
         try {
-            User user = (User) jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?",
+            User user = (User) jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE userName = ? AND password = ?",
                     new Object[]{username, password},
                     new BeanPropertyRowMapper<>(User.class));
-            jdbcTemplate.update("UPDATE USERS SET STATUS = ? WHERE USERNAME = ? AND ID = ?",
+            jdbcTemplate.update("UPDATE USERS SET status = ? WHERE userName = ?",
                     "ACTIVE",
-                    user.getUsername(),
-                    user.getId());
+                    user.getUsername());
             return user;
         } catch (Exception e) {
             System.out.println("Wrong username or password!");
@@ -49,12 +48,15 @@ public class RegistrationDBLogic {
         return null;
     }
 
-    String signOut(String username) {
+    User signOut(String username, String password) {
         try {
-            jdbcTemplate.update("UPDATE USERS SET STATUS = ? WHERE USERNAME = ?",
+            User user = (User) jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE userName = ? AND password = ?",
+                    new Object[]{username, password},
+                    new BeanPropertyRowMapper<>(User.class));
+            jdbcTemplate.update("UPDATE USERS SET status = ? WHERE userName = ?",
                     "NOT_ACTIVE",
-                    username);
-            return "You successfully signed out," + " " + username;
+                    user.getUsername());
+            return user;
         } catch (Exception e) {
             System.out.println("There is no such a user");
         }
