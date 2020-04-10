@@ -33,7 +33,7 @@ public class FeedService {
     @Autowired
     private final UsersRepository usersRepository;
 
-    @KafkaListener(topics = "Feed", groupId = "kafka")
+    @KafkaListener(topics = "${feed.topic.getTweet}", groupId = "kafka")
     public void consumeJson(@Payload List<Tweet> tweet) {
         System.out.println("Consumed JSON Message: " + tweet);
     }
