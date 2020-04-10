@@ -1,5 +1,6 @@
 package ru.sbt.twitter.registration.model;
 
+import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.Data;
 
 
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 @Data
 public class User extends BaseEntity {
 
-    @Column(name = "username")
+    @Column(name = "userName")
     private String username;
 
     @Column(name = "firstName")

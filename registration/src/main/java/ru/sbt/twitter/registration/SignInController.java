@@ -24,8 +24,8 @@ public class SignInController {
         return new ResponseEntity<User>(dbLogic.signIn(username, password), OK);
     }
 
-    @GetMapping("/signOut/{username}")
-    public ResponseEntity<String> signOut(@PathVariable String username) {
-        return new ResponseEntity<>(dbLogic.signOut(username), OK);
+    @GetMapping("/signOut/{username}/{password}")
+    public ResponseEntity<User> signOut(@PathVariable String username, @PathVariable String password) {
+        return new ResponseEntity<User>(dbLogic.signOut(username, password), OK);
     }
 }

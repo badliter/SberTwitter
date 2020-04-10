@@ -1,12 +1,12 @@
 CREATE TABLE USERS
 (
-    ID LONG NOT NULL auto_increment,
-    USERNAME NVARCHAR,
-    EMAIL NVARCHAR,
-    PASSWORD NVARCHAR,
-    FIRST_NAME NVARCHAR,
-    LAST_NAME NVARCHAR,
-    STATUS NVARCHAR,
-    CREATED DATETIME,
-    UPDATED DATETIME
+    userId LONG NOT NULL auto_increment,
+    userName NVARCHAR,
+    email NVARCHAR,
+    password NVARCHAR,
+    firstName NVARCHAR,
+    lastName NVARCHAR,
+    status NVARCHAR,
+    created DATETIME,
+    updated DATETIME
 );

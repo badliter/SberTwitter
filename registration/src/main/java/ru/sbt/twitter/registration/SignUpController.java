@@ -22,7 +22,7 @@ public class SignUpController {
     }
 
     @PostMapping("/signUp")
-    public ResponseEntity<String> signUp(@RequestBody User user){
+    public ResponseEntity<User> signUp(@RequestBody User user){
         return new ResponseEntity<>(dbLogic.signUp(user), OK);
     }
 }
