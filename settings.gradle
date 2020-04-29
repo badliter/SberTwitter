@@ -7,4 +7,5 @@ include ':tweets',
         ':infra:eureka',
         ':subscribers',
         ':registration',
-        ':feedDb'
+        ':feedDb',
+        ':kafka'
