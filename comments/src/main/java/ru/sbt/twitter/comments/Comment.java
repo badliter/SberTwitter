@@ -2,20 +2,20 @@ package ru.sbt.twitter.comments;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.UUID;
 
-@Entity
 @Data
 @NoArgsConstructor
+@Table
 public class Comment {
-    @Id
-    @GeneratedValue
-    private Integer id;
-    private LocalDateTime creationTime;
-    private String author;
-    private String content;
+    @PrimaryKey("id") private UUID id;
+    @Column("tweet_id") private Integer tweetId;
+    @Column("timestamp") private Date timestamp;
+    @Column("author") private String author;
+    @Column("content")private String content;
 }

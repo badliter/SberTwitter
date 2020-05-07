@@ -1,33 +1,23 @@
 package ru.sbt.twitter.comments;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.cassandra.core.query.CassandraPageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.data.cassandra.core.query.CassandraPageRequest.of;
+
 @RestController
+@RequiredArgsConstructor
 public class CommentsController {
-    @Autowired
-    CommentsService commentsService;
+    private final CommentsService commentsService;
 
     @GetMapping("/comments")
-    private List<Comment> getAllComments() {
-        return commentsService.getAllComments();
-    }
-
-    @GetMapping("/comments/{id}")
-    private Comment getCommentById(@PathVariable("id") int id) {
-        return commentsService.getCommentById(id);
-    }
-
-    @DeleteMapping("/comments/{id}")
-    private void deleteComment(@PathVariable("id") int id) {
-        commentsService.delete(id);
-    }
-
-    @PostMapping("/comments")
-    private int saveComment(@RequestBody Comment comment) {
-        commentsService.saveOrUpdate(comment);
-        return comment.getId();
+    private List<Comment> getComments(@RequestParam int tweetId,
+                                      @RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "50") int size) {
+        return commentsService.getComments(tweetId, page, size);
     }
 }

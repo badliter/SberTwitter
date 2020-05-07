@@ -1,31 +1,30 @@
 package ru.sbt.twitter.comments;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+import static org.springframework.data.cassandra.core.query.CassandraPageRequest.first;
+
 @Service
+@RequiredArgsConstructor
 public class CommentsService {
-    @Autowired
-    CommentsRepository commentsRepository;
+    private final CommentsRepository commentsRepository;
 
-    public List<Comment> getAllComments() {
-        List<Comment> comments = new ArrayList<>();
-        commentsRepository.findAll().forEach(comments::add);
-        return comments;
-    }
+    public List<Comment> getComments(int tweetId, int page, int size) {
+        Slice<Comment> commentsBatch = commentsRepository.getCommentsBatch(tweetId, first(size));
+        if (page == 0) return commentsBatch.getContent();
 
-    public Comment getCommentById(int id) {
-        return commentsRepository.findById(id).orElse(null);
-    }
-
-    public void saveOrUpdate(Comment comment) {
-        commentsRepository.save(comment);
-    }
-
-    public void delete(int id) {
-        commentsRepository.deleteById(id);
+        int current = 0;
+        Slice<Comment> currentBatch = commentsBatch;
+        while (current < page) {
+            if (!currentBatch.hasNext()) return emptyList();
+            currentBatch = commentsRepository.getCommentsBatch(tweetId, currentBatch.nextPageable());
+            current++;
+        }
+        return currentBatch.getContent();
     }
 }
