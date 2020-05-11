@@ -1,13 +1,11 @@
 package ru.sbt.twitter.comments;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.cassandra.core.query.CassandraPageRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
-import static org.springframework.data.cassandra.core.query.CassandraPageRequest.of;
 
 @RestController
 @RequiredArgsConstructor
